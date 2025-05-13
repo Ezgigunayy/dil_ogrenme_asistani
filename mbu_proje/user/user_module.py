@@ -9,7 +9,6 @@ class User:
         self.vocabulary = vocabulary if vocabulary is not None else []
 
     def login(self):
-    # Simple validation for demonstration
         if self.username and self.password:
             print(f"kullanıcı {self.username} girişi başarılı!")
         else:
@@ -18,7 +17,6 @@ class User:
     def save_data(self):
         all_data = {}
 
-        # Mevcut dosya varsa, oku
         if os.path.exists("all_users_report.json"):
             with open("all_users_report.json", "r", encoding="utf-8") as f:
                 try:
@@ -26,7 +24,6 @@ class User:
                 except json.JSONDecodeError:
                     all_data = {}
 
-        # Mevcut kullanıcı verilerini güncelle
         all_data[self.username] = {
             "username": self.username,
             "password": self.password,
@@ -34,7 +31,6 @@ class User:
             "vocabulary": self.vocabulary
         }
 
-        # Dosyaya yaz
         with open("all_users_report.json", "w", encoding="utf-8") as f:
             json.dump(all_data, f, ensure_ascii=False, indent=4)
 
