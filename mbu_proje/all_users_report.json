@@ -1,0 +1,21 @@
+{
+    "ezgi": {
+        "username": "ezgi",
+        "password": "147",
+        "email": "deneme",
+        "vocabulary": [
+            {
+                "turkish": "dondurma",
+                "english": "ice cream"
+            },
+            {
+                "turkish": "aşk",
+                "english": "love"
+            },
+            {
+                "turkish": "ayna",
+                "english": "mirror"
+            }
+        ]
+    }
+}
