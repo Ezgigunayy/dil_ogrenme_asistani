@@ -5,14 +5,12 @@ from vocabulary.vocabulary_module import add_new_word, list_words, remove_word
 from quizz.quiz_module import start_quiz
 from reports.report_module import generate_report
 
-# Renk ve stil ayarları
 BG_COLOR = "#faf5e4"
 BTN_COLOR = "#f67280"
 BTN_HOVER = "#c06c84"
 FONT = ("Helvetica", 12)
 TITLE_FONT = ("Helvetica", 16, "bold")
 
-# Global kullanıcı nesnesi
 global_user = None
 
 def apply_button_style(button):
@@ -76,13 +74,11 @@ def kelime_ekle_penceresi():
             messagebox.showwarning("Uyarı", "Lütfen her iki alanı da doldurun.")
             return
 
-        # Kelimeleri ekleme işlemi
         global_user.vocabulary.append({"turkish": turkish, "english": english})
         global_user.save_data()
         messagebox.showinfo("Başarılı", f"{turkish} - {english} kelimesi eklendi.")
         pencere.destroy()
 
-    # Kelime Ekle butonu yerleştirildi
     kelime_ekle_button = tk.Button(pencere, text="Kelime Ekle", width=30, bg=BG_COLOR, fg="white", command=kelime_ekle)
     apply_button_style(kelime_ekle_button)
     kelime_ekle_button.grid(row=2, column=0, columnspan=2, pady=20)
@@ -108,7 +104,6 @@ def kelime_sil_penceresi():
             messagebox.showerror("Hata", "Lütfen kullanıcı adınızı girin.")
             return
 
-        # Yeni bir User nesnesi oluştur (şifre ve email boş geçilebilir, varsayalım dosya sadece kullanıcı adına göre kayıtlı)
         global_user = User(username, "", "", [])
         global_user.load_data()
 
@@ -219,24 +214,20 @@ def rapor_olustur():
         messagebox.showinfo("Bilgi", "Rapor oluşturmak için önce kullanıcıyı seçmeli ve kelime eklemelisiniz.")
         return
 
-    # Yeni pencere oluştur
     rapor_pencere = tk.Toplevel()
     rapor_pencere.title("Kelime Raporu")
     rapor_pencere.geometry("500x400")
 
-    # Başlıklar
     header = ["Türkçe", "İngilizce"]
     for col_index, baslik in enumerate(header):
         label = tk.Label(rapor_pencere, text=baslik, font=("Arial", 12, "bold"), borderwidth=1, relief="solid", width=15)
         label.grid(row=0, column=col_index, sticky="nsew")
 
-    # Verileri yaz
     for row_index, word in enumerate(global_user.vocabulary, start=1):
         tk.Label(rapor_pencere, text=word["turkish"], borderwidth=1, relief="solid").grid(row=row_index, column=0, sticky="nsew")
         tk.Label(rapor_pencere, text=word["english"], borderwidth=1, relief="solid").grid(row=row_index, column=1, sticky="nsew")
         #tk.Label(rapor_pencere, text=word["zorluk"], borderwidth=1, relief="solid").grid(row=row_index, column=2, sticky="nsew")
 
-    # Pencereyi esnek yap
     for i in range(3):
         rapor_pencere.grid_columnconfigure(i, weight=1)
 
