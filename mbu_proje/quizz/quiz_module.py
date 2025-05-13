@@ -26,7 +26,6 @@ class Quiz:
         print(f"Test Sonucu: {score}/{len(self.questions)}")
 
     def create_custom_quiz(self, vocabulary):
-        """Kullanıcı kelimeleriyle özel bir quiz oluşturur."""
         if not vocabulary:
             print("Kelime listesi boş.")
             return
@@ -35,22 +34,19 @@ class Quiz:
             turkish = word['turkish']
             english = word['english']
 
-            # Türkçe -> İngilizce sorusu
             question = f"{turkish} kelimesinin İngilizcesi nedir?"
-            options = [english, "apple", "computer", "cloud"]  # örnek yanlış seçenekler
-            random.shuffle(options)  # Seçenekleri karıştırıyoruz
+            options = [english, "apple", "computer", "cloud"]  
+            random.shuffle(options)  
             correct_option = english
             self.create_quiz(question, options, correct_option)
             
             # İngilizce -> Türkçe sorusu
             question = f"{english} kelimesinin Türkçesi nedir?"
-            options = [turkish, "kitap", "masa", "telefon"]  # örnek yanlış seçenekler
+            options = [turkish, "kitap", "masa", "telefon"]  
             random.shuffle(options)
             correct_option = turkish
             self.create_quiz(question, options, correct_option)
 
-
-# start_quiz fonksiyonu burada dışarıda tanımlanmalıdır
 def start_quiz(user):
     if not user.vocabulary:
         print("Uyarı: Henüz kelime yüklenmedi. Kelimeler yükleniyor...")
