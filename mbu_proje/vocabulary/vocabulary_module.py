@@ -1,32 +1,3 @@
-# from vocabulary.word_module import add_word, get_all_words, delete_word
-# from reports.report_module import generate_report
-
-# # def add_new_word():
-# #     word = input("Kelimeyi girin: ")
-# #     meaning = input(f"{word} kelimesinin anlamını girin: ")
-# #     add_word(word, meaning)
-# from reports.report_module import generate_report
-
-# def add_new_word(user):
-#     turkish_word = input("Türkçe kelimeyi girin: ")
-#     english_word = input("İngilizce anlamını girin: ")
-#     new_word = [turkish_word, english_word]
-#     generate_report(user, new_word)
-
-
-# def list_words(user):
-#     words = get_all_words()
-#     if words:
-#         for word, meaning in words:
-#             print(f"{word}: {meaning}")
-#     else:
-#         print("Henüz kelime eklenmedi.")
-
-# def remove_word():
-#     word = input("Silmek istediğiniz kelimeyi girin: ")
-#     delete_word(word)
-
-
 import json
 from reports.report_module import generate_report
 
@@ -40,14 +11,9 @@ def add_new_word(user):
 
     new_word = {"turkish": turkish_word, "english": english_word}
 
-    # # Kelimeyi rapora ekle
-    # generate_report(user, new_word)
-    
-    # Kullanıcı kelimelerine ekle
     user.vocabulary.append(new_word)
     print(f"{turkish_word} - {english_word} kelimesi başarıyla eklendi.")
 
-    # Kelimeyi rapora ekle
     generate_report(user, new_word)
 
 def list_words(user):
@@ -63,7 +29,6 @@ def list_words(user):
                 for word in entry["vocabulary"]:
                     print(f'{word["turkish"]}: {word["english"]}')
 
-                # Belleğe yükle
                 user.vocabulary = entry["vocabulary"]
                 return
 
@@ -92,11 +57,9 @@ def remove_word(user):
                     print(f"{word_to_delete} kelimesi bulunamadı.")
                 break
 
-        # Güncellenmiş verileri dosyaya yaz
         with open(report_filename, 'w') as file:
             json.dump(report_data, file, indent=4)
 
-        # Bellekte de güncelle
         user.vocabulary = [w for w in user.vocabulary if w["turkish"] != word_to_delete]
 
     except FileNotFoundError:
